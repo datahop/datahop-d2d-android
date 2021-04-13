@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_content"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Groups" />
+        <!--<item
+            android:id="@+id/nav_status"
+            android:icon="@android:drawable/ic_dialog_alert"
+            android:title="Status" />-->
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_quit"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="Quit" />
+
+    </group>
+
+    <item android:title="Datahop.network">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+        </menu>
+    </item>
+
+</menu>

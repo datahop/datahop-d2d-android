@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      style="@style/default_linear_layout_padding"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:layout_marginTop="10dp">
+
+
+    <LinearLayout android:id="@+id/wifi_status_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <TextView style="?android:listSeparatorTextViewStyle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/pref_category_wifi_title_status"
+          />
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="@string/status" />
+
+        <TextView android:id="@+id/status"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="SSID" />
+
+        <TextView android:id="@+id/sd"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="Users connected" />
+
+        <TextView android:id="@+id/users"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="Connections" />
+
+        <TextView android:id="@+id/started"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="Connections failed" />
+
+        <TextView android:id="@+id/failed"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+      <!--<LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="Discoveries" />
+
+        <TextView android:id="@+id/discoveries"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="Wifi Direct status" />
+
+        <TextView android:id="@+id/link"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>-->
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/bt_status_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <TextView style="?android:listSeparatorTextViewStyle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/pref_category_bt_title_status"
+          />
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="@string/btstatus" />
+
+        <TextView android:id="@+id/btstatus"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+      <LinearLayout style="@style/main_fragment_linear_layout">
+        <TextView style="@style/main_fragment_list_title"
+            android:text="@string/btconnect" />
+
+        <TextView android:id="@+id/btconnect"
+            style="@style/main_fragment_list_value" />
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+</ScrollView>

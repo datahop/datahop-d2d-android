@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="windowBackground">@color/white</color>
+
+    <item name="datahop_blue" type="color">#99e2eb</item>
+    <item name="datahop_black" type="color">#2e343a</item>
+    <item name="datahop_grey" type="color">#f8f8f8</item>
+    <item name="datahop_yellow" type="color">#f2e05f</item>
+</resources>
