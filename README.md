@@ -44,9 +44,12 @@ process.
 * [x] Connectivity should be transparent (and run as
 a background process) to the user (i.e., it should not require the
 users’ manual intervention.
+* [x] Library should work on any Android device without requiring to 'root' the device
 * [x] Connectivity must take into account power consumption and must implement mechanisms to avoid battery depletion.
 
 # Installation
+
+
 
 # Usage
 
