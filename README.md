@@ -92,7 +92,7 @@ This library can be used to sync files between devices using the same app using 
 ```
 LocalFirstSDK.init(getApplicationContext());
 
- LocalFirstSDK.start(getApplicationContext(),username,scan,scanTime,foregroundIdleTime,backgroundIdleTime,hotspotRestartTime, new LocalFirstListener(){
+LocalFirstSDK.start(getApplicationContext(),username,scan,scanTime,foregroundIdleTime,backgroundIdleTime,hotspotRestartTime, new LocalFirstListener(){
             @Override
             public void newFileReceived(String name) {
             ...
@@ -114,21 +114,25 @@ LocalFirstSDK.init(getApplicationContext());
 
 ## Stop service
 
-```
+
 LocalFirstSDK.stop(getApplicationContext());
 ```
 
 
 ## Add groups
 
+```
+LocalFirstSDK.addGroup(getApplicationContext(),userGroup)
+```
+
 ## Add files
+
+```
+LocalFirstSDK.addFile(getApplicationContext(),filePath,userGroup)
+```
 
 # Demo file-sharing application
 
-# Others
-
-# How to make contributions
-Please read and follow the steps in [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 # License
 
