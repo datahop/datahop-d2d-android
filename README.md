@@ -85,6 +85,44 @@ The library can be also automatically imported via gradle: TBC
 
 # Usage
 
+This library can be used to sync files between devices using the same app using device-to-device. Users can create groups, add files within the groups and files are shared automatically between users totally transparent. 
+
+## Start service
+
+```
+LocalFirstSDK.init(getApplicationContext());
+
+ LocalFirstSDK.start(getApplicationContext(),username,scan,scanTime,foregroundIdleTime,backgroundIdleTime,hotspotRestartTime, new LocalFirstListener(){
+            @Override
+            public void newFileReceived(String name) {
+            ...
+            }
+
+            @Override
+            public void newUSerDiscovered(String name) {
+
+            ....
+            }
+
+            @Override
+            public void newDataDiscovered(String data) {
+            ....
+
+            }
+        });
+```
+
+## Stop service
+
+```
+LocalFirstSDK.stop(getApplicationContext());
+```
+
+
+## Add groups
+
+## Add files
+
 # Demo file-sharing application
 
 # Others
