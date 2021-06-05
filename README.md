@@ -114,7 +114,7 @@ LocalFirstSDK.start(getApplicationContext(),username,scan,scanTime,foregroundIdl
 
 ## Stop service
 
-
+```
 LocalFirstSDK.stop(getApplicationContext());
 ```
 
@@ -133,6 +133,7 @@ LocalFirstSDK.addFile(getApplicationContext(),filePath,userGroup)
 
 # Demo file-sharing application
 
+The repo includes a file sharing application in the [`demo-filesharing`](./demo-filesharing) folder using the d2d library. 
 
 # License
 
