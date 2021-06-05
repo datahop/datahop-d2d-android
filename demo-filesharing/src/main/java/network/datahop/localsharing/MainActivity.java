@@ -86,15 +86,7 @@ public class MainActivity extends AppCompatActivity
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
     private static final int PERMISSION_WIFI_STATE = 3;
-    //private static final int PERMISSION_REQUEST_WIFI_CHANGE = 4;
     private static final String TAG = "MainActivity";
-
-    /** Client Message Handler */
-    //private final Messenger m_clientMessenger = new Messenger(new ClientHandler());
-    /** Messenger connection to DataHop Service */
-    //private Messenger m_serviceMessenger = null;
-    /** Flag that marks that application is connected to the DataHop Service */
-    //private boolean m_isServiceConnected = false;
 
     BroadcastReceiver mBroadcastReceiver;
     SettingsPreferences timers;
@@ -104,13 +96,10 @@ public class MainActivity extends AppCompatActivity
     JobScheduler tm;
     MainActivity that;
     String name;
-    Messenger messengerIncoming,messengerAdvIncoming;
     boolean resumed=true;
     boolean groupActivityStarted=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Disable bluetooth
 
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
         {
@@ -136,16 +125,8 @@ public class MainActivity extends AppCompatActivity
 
         timers = new SettingsPreferences(getApplicationContext());
         mHandler = new ClientHandler(this);
-        //mServiceComponent = new ComponentName(this, DiscoveryService.class);
-        //mAdvServiceComponent = new ComponentName(this,AdvertisingService.class);
-        db = new ContentDatabaseHandler(this);
-        /*Group group = new Group();
-        group.setGroupId(1);
-        group.setName("testgroup");
-        group.setTimestamp(System.currentTimeMillis());
-        db.addGroup(group);*/
 
-        //Messenger messengerIncoming = new Messenger(mHandler);
+        db = new ContentDatabaseHandler(this);
 
         tm = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         that = this;
@@ -182,74 +163,7 @@ public class MainActivity extends AppCompatActivity
                             }
                         }
                         break;
-                    /*case DiscoveryService.DISCOVERED:
-                    case DiscoveryService.SAME_DISCOVERED:
-                    //case TransferFunds.FUNDS_RESULTS:
 
-                        extras = intent.getExtras();
-                        if (extras != null) {
-                            if (extras.containsKey("message")) {
-                                Toast.makeText(getApplicationContext(), intent.getStringExtra("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        break;
-                    */
-                    /*case DataSharingClient.DOWNLOAD_COMPLETED:
-                        G.Log(TAG,"Download completed");
-                        //Fragment fragment = MainFragment.newInstance();
-                        Fragment fragment = GroupsListFragment.newInstance();
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_fragment_container, fragment, "MainFragment")
-                                .commit();
-                        break;*/
-                        /*if(getSupportFragmentManager().getPrimaryNavigationFragment() instanceof MainFragment)
-                        {
-                            MainFragment fragment = (MainFragment) getSupportFragmentManager().getPrimaryNavigationFragment();
-                            fragment.refreshAdapter();
-                        }
-                        break;
-                    case DataSharingClient.NEW_VIDEO_RECEIVED:
-                    case DataSharingClient.NEW_CHUNK_RECEIVED:
-                        G.Log(TAG,"New chunk received");
-                        /*extras = intent.getExtras();
-                        //Toast.makeText(getApplicationContext(), "File reception complete.", Toast.LENGTH_SHORT).show();
-                        if (extras != null) {
-                            if (extras.containsKey("message")) {
-                                G.Log(TAG,intent.getStringExtra("message"));
-                                Toast.makeText(getApplicationContext(), intent.getStringExtra("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "File reception complete.", Toast.LENGTH_SHORT).show();
-                        }*/
-
-                        /*MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag("MainFragment");
-
-                        if (mainFragment != null && mainFragment.isVisible()) {
-                            G.Log(TAG,"Fragment active");
-                            mainFragment.refreshAdapter();
-                        }
-                        else {
-                            G.Log(TAG,"Fragment not active");
-                        }
-                        break;
-                    case CLEAR_VIDEOS:
-                        Fragment fragment2 = GroupsListFragment.newInstance();
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_fragment_container, fragment2, "MainFragment")
-                                .commit();
-                        break;
-
-                    case AdvertisingService.NOT_SUPPORTED:
-                        extras = intent.getExtras();
-                        if (extras != null) {
-                            if (extras.containsKey("message")) {
-                                Toast.makeText(getApplicationContext(), intent.getStringExtra("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        break;
-                        */
                 }
             }
         };
@@ -266,7 +180,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Groups");
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("Meeting Id: "+timers.getMeetingId());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -276,8 +189,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-       // StatsHandler st = new StatsHandler(getApplicationContext());
 
         View hView =  navigationView.getHeaderView(0);
         TextView nav_user = (TextView)hView.findViewById(R.id.userview);
@@ -295,7 +206,6 @@ public class MainActivity extends AppCompatActivity
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mBroadcastReceiver, getIntentFilter());
         LocalFirstSDK.init(getApplicationContext());
         if(timers.getStoragePermission()&&timers.getStoragePermission())startService();
-        //startService();
         super.onCreate(savedInstanceState);
 
 
@@ -337,28 +247,7 @@ public class MainActivity extends AppCompatActivity
             });
             builder.show();
         }
-            /*if (this.checkSelfPermission(Manifest.permission.CHANGE_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        requestPermissions(new String[]{Manifest.permission.CHANGE_WIFI_STATE}, PERMISSION_REQUEST_WIFI_CHANGE);
-                    }
-                });
-                builder.show();
-            }
-            if (this.checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_WIFI_STATE}, PERMISSION_REQUEST_WIFI_STATE);
-                    }
-                });
-                builder.show();
-            }*/
     }
 
     @Override
@@ -435,21 +324,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             GroupsListFragment group = (GroupsListFragment)fragment;
             group.setOnChatGroupClickListener(this);
-            // Handle the camera action
-        /*} else if (id == R.id.nav_status) {
-            Fragment fragment = ServiceFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_fragment_container, fragment, "ServiceFragment")
-                    .commit();
-        } else if (id == R.id.nav_wallet) {
-            Fragment fragment = WalletFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_fragment_container, fragment, "WalletFragment")
-                    .commit();
-
-        */} else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_settings) {
             Fragment fragment = SettingsFragment.newInstance();
             getSupportFragmentManager()
                     .beginTransaction()
@@ -491,8 +366,6 @@ public class MainActivity extends AppCompatActivity
         //GetLatestVersion checkVersion = new GetLatestVersion(this);
         resumed=true;
 
-        //bindService();
-        //if(timers.getStoragePermission()&&timers.getStoragePermission())startService();
         super.onResume();
 
     }
@@ -524,15 +397,6 @@ public class MainActivity extends AppCompatActivity
     protected void onPause(){
         G.Log(TAG,"onPause");
         resumed=false;
-        //unbindService();
-        //G.Log(TAG,"Starting service "+timers.isScanning());
-        /*if(timers.isScanning()) {
-            Intent startServiceIntent = new Intent(this, DiscoveryService.class);
-            Messenger messengerIncoming = new Messenger(mHandler);
-            startServiceIntent.putExtra(MESSENGER_INTENT_KEY, messengerIncoming);
-            startService(startServiceIntent);
-            scheduleJob(timers.getBtIdleBgTime());
-        }*/
         super.onPause();
 
     }
@@ -563,9 +427,7 @@ public class MainActivity extends AppCompatActivity
         G.Log(TAG,"Group clicked "+db.getGroupName(position)+" "+position);
         groupActivityStarted=true;
         db.groupClearPending(chatGroup.getName());
-        /*Intent intent = new Intent(MainActivity.this, GroupActivity.class);
-        intent.putExtra("group", db.getGroupName(position));
-        startActivityForResult(intent,1);*/
+
         Intent intent = new Intent(that, GroupActivity.class);
         intent.putExtra("group", db.getGroupName(position+1));
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -597,85 +459,11 @@ public class MainActivity extends AppCompatActivity
 
     public void stopServices(){
         G.Log(TAG,"Stop services");
-        //tm.cancelAll();
-        //Intent broadcast = new Intent(STOP);
-        //LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadcast);
-        /*Message m = Message.obtain();
-        m.what = 4;
-        try{messengerAdvIncoming.send(m);}catch (RemoteException e){G.Log(TAG,"Remote exception "+e);}
-        Message m2 = Message.obtain();
-        m.what = 4;
-        try{messengerIncoming.send(m2);}catch (RemoteException e){G.Log(TAG,"Remote exception "+e);}*/
+
         LocalFirstSDK.stop(getApplicationContext());
-        //stopService(new Intent(this, DiscoveryService.class));
-        //stopService(new Intent(this, AdvertisingService.class));
+
 
     }
-
-
-
-    /**
-     * Method that binds the current activity to the DataHop Service.
-     */
-    /*private void
-    bindService() {
-        if (!m_isServiceConnected) {
-            // Bind to Service
-            bindService(new Intent(this, DataHopConnectivityService.class),
-                    m_ServiceConnection, Context.BIND_AUTO_CREATE);
-            G.Log(TAG,"bindService()");
-        }
-    }*/
-
-    /**
-     * Method that unbinds the current activity from the DataHop Service.
-     */
-   /* private void
-    unbindService() {
-        if (m_isServiceConnected) {
-            // Unbind from Service
-            unbindService(m_ServiceConnection);
-
-            m_isServiceConnected = false;
-
-            G.Log(TAG,"unbindService()");
-        }
-
-    }*/
-
-    /**
-     * Client ServiceConnection to DataHop Service.
-     */
-    /*public final ServiceConnection m_ServiceConnection = new ServiceConnection() {
-        @Override
-        public void
-        onServiceConnected(ComponentName className, IBinder service) {
-            // Establish Messenger to the Service
-            m_serviceMessenger = new Messenger(service);
-            m_isServiceConnected = true; // onServiceConnected runs on the main thread
-            G.Log(TAG,"Connected");
-            // Check if DataHop  Service is running
-            try {
-                Message msg = Message.obtain(null, DataHopConnectivityService.CHECK_LOGIN);
-                msg.replyTo = m_clientMessenger;
-                G.Log(TAG,"message "+msg.replyTo);
-                m_serviceMessenger.send(msg);
-            } catch (RemoteException e) {
-                // If Service crashes, nothing to do here
-                G.Log(TAG,"onServiceConnected(): " + e);
-            }
-
-            G.Log(TAG,"m_ServiceConnection::onServiceConnected()");
-        }
-
-        @Override
-        public void
-        onServiceDisconnected(ComponentName componentName) {
-            // In event of unexpected disconnection with the Service; Not expecting to get here.
-            G.Log(TAG,"m_ServiceConnection::onServiceDisconnected()");
-            m_isServiceConnected = false; // onServiceDisconnected runs on the main thread
-        }
-    };*/
 
     private void refresh()
     {
@@ -892,12 +680,9 @@ public class MainActivity extends AppCompatActivity
                         // Writing Contacts to log
                         String name = content.getName();
                         if (content.getId() > 0) name += "." + content.getId();
-                        //G.Log(TAG,"Name:"+ name+ " desc:" + cn.getText() + " url:"+cn.getUrl());
                         if (subFiles != null) {
-                            //G.Log("Files " +subFiles);
                             for (File file : subFiles)
                             {
-                                // G.Log("Filename " + cn.getName() + " " +file.getAbsolutePath()+" "+file.getName()+" "+file.length());
                                 if (file.getName().equals(name) || file.getName().equals(content.getName()))
                                     file.delete();
                             }
@@ -906,11 +691,9 @@ public class MainActivity extends AppCompatActivity
 
                 }
                 db.rmGroup(group.getName());
-            //}
+  
         }
-        /*String action = DataSharingClient.DOWNLOAD_COMPLETED;
-        Intent broadcast = new Intent(action);
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadcast);*/
+
         refresh();
 
     }
@@ -927,10 +710,8 @@ public class MainActivity extends AppCompatActivity
                 if (content.getId() > 0) name += "." + content.getId();
                 //G.Log(TAG,"Name:"+ name+ " desc:" + cn.getText() + " url:"+cn.getUrl());
                 if (subFiles != null) {
-                    //G.Log("Files " +subFiles);
                     for (File file : subFiles)
                     {
-                        // G.Log("Filename " + cn.getName() + " " +file.getAbsolutePath()+" "+file.getName()+" "+file.length());
                         if (file.getName().equals(name) || file.getName().equals(content.getName()))
                             file.delete();
                     }
@@ -941,9 +722,6 @@ public class MainActivity extends AppCompatActivity
             db.rmGroup(group.getName());
         }
 
-        /*String action = DataSharingClient.DOWNLOAD_COMPLETED;
-        Intent broadcast = new Intent(action);
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadcast);*/
         refresh();
     }
 
@@ -965,13 +743,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void acceptanceNotification(final String msg){
-
-        /*Intent mIntentReject = new Intent(this, MainActivity.class);
-        Intent snoozeIntent = new Intent(this, MainActivity.class);
-        snoozeIntent.setAction(ACCEPTANCE);
-        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-        PendingIntent snoozePendingIntent =
-                PendingIntent.getBroadcast(this, 0, snoozeIntent, 0);*/
 
         Intent intentAccept = new Intent(this, MainActivity.class);
         intentAccept.setAction(ACTION_ACCEPT);
@@ -1000,37 +771,10 @@ public class MainActivity extends AppCompatActivity
                 .setAutoCancel(true)
                 .setContentText("User "+msg+" is trying to create a group with you.");
 
-        /*TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-        stackBuilder.addNextIntent(intent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
-                0,
-                PendingIntent.FLAG_UPDATE_CURRENT
-        );*/
-
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-// notificationId is a unique int for each notification that you must define
+        // notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, mBuilder.build());
-
-/*
-// build notification
-// the addAction re-use the same intent to keep the example short
-        Notification n  = new Notification.Builder(this)
-                .setContentTitle("Accept connection?")
-                .setContentText("User "+msg+" is trying to create a group with you.")
-                .setSmallIcon(R.mipmap.ic_stat_looks)
-                .setContentIntent(pIntent)
-                .setAutoCancel(true)
-                .setActions()
-                .addAction(R.drawable.ic_icon, "Accept", pIntent)
-                .addAction(R.drawable.ic_icon, "Decline", pIntent).build();
-        //.addAction(R.drawable.ic_icon, "See", pIntent).build();
-
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0, n);*/
 
         // Turn on the screen for notification
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -1060,16 +804,9 @@ public class MainActivity extends AppCompatActivity
                 .setContentIntent(pIntent)
                 .setContentText(msg);
 
-        /*TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-        stackBuilder.addNextIntent(intent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
-                0,
-                PendingIntent.FLAG_UPDATE_CURRENT
-        );*/
-
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-// notificationId is a unique int for each notification that you must define
+        // notificationId is a unique int for each notification that you must define
         notificationManager.notify(1, builder.build());
 
         // Turn on the screen for notification
@@ -1148,15 +885,8 @@ public class MainActivity extends AppCompatActivity
     private IntentFilter getIntentFilter()
     {
         IntentFilter filter = new IntentFilter();
-        //filter.addAction(DiscoveryService.DISCOVERED);
-        //filter.addAction(DiscoveryService.SAME_DISCOVERED);
-        //filter.addAction(DataSharingClient.DOWNLOAD_COMPLETED);
-        //filter.addAction(DataSharingClient.NEW_VIDEO_RECEIVED);
-        //filter.addAction(DataSharingClient.NEW_CHUNK_RECEIVED);
-        //filter.addAction(CLEAR_VIDEOS);
         filter.addAction(NOT_SUPPORTED);
         filter.addAction(DIRECT_CONNECTION);
-        //filter.addAction(TransferFunds.FUNDS_RESULTS);
         return filter;
     }
 
